@@ -43,9 +43,9 @@ node {
             stage('Terraform Plan') {
                 dir("base-vpc") {
                     if (params.apply_or_destroy == 'Destroy') {
-                        sh "terraform plan -destroy -input=false -refresh=true -module-depth=-1 -var-file=environments/${params.project}/inputs.tfvars"
+                        sh "terraform plan -destroy -input=false -refresh=true -module-depth=-1 -var-file=environments/globals/inputs.tfvars -var-file=environments/${params.project}/inputs.tfvars"
                     } else {
-                        sh "terraform plan -input=false -refresh=true -module-depth=-1 -var-file=environments/${params.project}/inputs.tfvars"
+                        sh "terraform plan -input=false -refresh=true -module-depth=-1 -var-file=environments/globals/inputs.tfvars -var-file=environments/${params.project}/inputs.tfvars"
                     }
                 }
             }
@@ -53,9 +53,9 @@ node {
             stage('Terraform Apply/Destroy') {
                 dir("base-vpc") {
                     if (params.apply_or_destroy == 'Destroy') {
-                        sh "terraform destroy -auto-approve -var-file=environments/${params.project}/inputs.tfvars"
+                        sh "terraform destroy -auto-approve -var-file=environments/globals/inputs.tfvars -var-file=environments/${params.project}/inputs.tfvars"
                     } else {
-                        sh "terraform apply -input=true -auto-approve -refresh=true -var-file=environments/${params.project}/inputs.tfvars"
+                        sh "terraform apply -input=true -auto-approve -refresh=true -var-file=environments/globals/inputs.tfvars -var-file=environments/${params.project}/inputs.tfvars"
                     }
                 }
             }
