@@ -9,7 +9,7 @@ init: ## Initializes the terraform remote state backend and pulls the correct en
 	@rm -rf .terraform/*.tf*
 	@terraform init \
         -backend-config="bucket=${BUCKET}" \
-        -backend-config="key=terraform/terraform-aws-base.tfstate" \
+        -backend-config="key=terraform/terraform-${PROJECT}.tfstate" \
         -backend-config="region=us-east-1"
 
 update: ## Gets any module updates
