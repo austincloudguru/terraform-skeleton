@@ -18,7 +18,8 @@ The directory layout is pretty straight forward.  It contains a directory for a
     ├── provider.tf
     ├── main.tf
     ├── variables.tf
-    ├── outputs.tf 
+    ├── outputs.tf
+    ├── statefile.tf 
     ├── README.md
     └── LICENSE
 ## Projects
@@ -47,6 +48,9 @@ The variables.tf file is used to initialize all the variables that I want to pas
 
 #### outputs.tf
 The outputs.tf file is for storing any outputs that you may want to make available to other Terraform projects at a later time.
+
+#### statefile.tf
+The statefile.tf file is for creating the resources needed to create the S3 bucket and DynamoDB used for the statefile.
 
 ### Errata
 The README.md and LICENSE file are self explanitory.
@@ -80,3 +84,14 @@ Once you have the skeleton repository checked out, you can update the origin and
     git remote rm origin
     git remote add origin git@github.com:AustinCloudGuru/terraform-test.git
     git push --set-upstream origin master
+    
+## Initialize the Statefile
+In order to avoid the chicken and the egg issue with terraform, we create the S3 storage and DynamoDB using a local statefile, and then once the resources exist we transfer the statefile to S3 bucket.  
+
+    make stateinit
+    make stateplan
+    make stateapply
+
+Uncomment the S3 backend in backends.tf file and then run the following command:
+
+    make init
