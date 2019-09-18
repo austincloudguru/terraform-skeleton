@@ -1,1 +1,3 @@
-# Outputs
+/*
+outputs.tf
+*/

@@ -1,1 +1,3 @@
-# Global Variables
+/*
+Global inputs.tfvars
+*/

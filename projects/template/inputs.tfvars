@@ -1,1 +1,4 @@
-# Project Variables
+/*
+inputs.tfvars
+*/
+tf_project = "template"
