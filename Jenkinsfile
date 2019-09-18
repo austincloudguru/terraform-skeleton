@@ -36,7 +36,7 @@ node {
 
             stage('Initialize the Backend') {
                 dir("base-vpc") {
-                    sh "terraform init -backend-config=\"bucket=${params.bucket}\" -backend-config=\"key=terraform/${params.project}.tfstate\" -backend-config=\"region=us-east-1\""
+                    sh "terraform init -backend-config=\"bucket=${params.bucket}\" -backend-config=\"key=terraform/${params.project}.tfstate\" -backend-config=\"dynamodb_table=terraform=${params.project}-lock\" -backend-config=\"region=us-east-1\""
                 }
             }
 

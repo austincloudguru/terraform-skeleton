@@ -21,6 +21,7 @@ init: ## Initializes the terraform remote state backend and pulls the correct pr
 	@terraform init \
         -backend-config="bucket=${BUCKET}" \
         -backend-config="key=terraform/terraform-${PROJECT}.tfstate" \
+        -backend-config="dynamodb_table=terraform-${PROJECT}-lock" \
         -backend-config="region=us-east-1"
 
 update: ## Gets any module updates
