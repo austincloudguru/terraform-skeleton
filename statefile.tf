@@ -12,14 +12,21 @@ resource "aws_s3_bucket" "terraform-state-storage-s3" {
   versioning {
     enabled = true
   }
-  /* lifecycle {
+  lifecycle {
     prevent_destroy = true
   }
-  */
   tags = {
     Name = "S3 Remote Terraform State Store"
     Project = "${var.tf_project}"
   }
+}
+
+resource "aws_s3_bucket_public_access_block" "block-tf-s3" {
+  bucket                  = aws_s3_bucket.terraform-state-storage-s3.id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }
 
 resource "aws_dynamodb_table" "dynamodb-terraform-state-lock" {
