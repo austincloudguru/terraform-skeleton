@@ -1,12 +1,6 @@
-/*
-statefile.tf
-*/
-# Quickly Set the Project
-variable "tf_project" {
-  type = string
-}
-
-# create an S3 bucket to store the state file in
+#------------------------------------------------------------------------------
+# Setup the backend for the state file
+#------------------------------------------------------------------------------
 resource "aws_s3_bucket" "terraform-state-storage-s3" {
   bucket = "terraform-${var.tf_project}"
   versioning {
@@ -16,7 +10,7 @@ resource "aws_s3_bucket" "terraform-state-storage-s3" {
     prevent_destroy = true
   }
   tags = {
-    Name = "S3 Remote Terraform State Store"
+    Name    = "S3 Remote Terraform State Store"
     Project = "${var.tf_project}"
   }
 }
@@ -30,9 +24,9 @@ resource "aws_s3_bucket_public_access_block" "block-tf-s3" {
 }
 
 resource "aws_dynamodb_table" "dynamodb-terraform-state-lock" {
-  name = "terraform-${var.tf_project}-lock"
-  hash_key = "LockID"
-  read_capacity = 20
+  name           = "terraform-${var.tf_project}-lock"
+  hash_key       = "LockID"
+  read_capacity  = 20
   write_capacity = 20
 
   attribute {
@@ -41,7 +35,7 @@ resource "aws_dynamodb_table" "dynamodb-terraform-state-lock" {
   }
 
   tags = {
-    Name = "DynamoDB Terraform State Lock Table"
+    Name    = "DynamoDB Terraform State Lock Table"
     Project = "${var.tf_project}"
   }
 }

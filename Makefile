@@ -15,14 +15,14 @@ stateapply: stateinit
 
 
 init: ## Initializes the terraform remote state backend and pulls the correct projects state.
-	@if [ -z $(BUCKET) ]; then echo "BUCKET was not set" ; exit 10 ; fi
 	@if [ -z $(PROJECT) ]; then echo "PROJECT was not set" ; exit 10 ; fi
+	@if [ -z $(AWS_REGION) ]; then echo "AWS Region was not set" ; exit 10 ; fi
 	@rm -rf .terraform/*.tf*
 	@terraform init \
-        -backend-config="bucket=${BUCKET}" \
-        -backend-config="key=terraform/terraform-${PROJECT}.tfstate" \
+        -backend-config="bucket=terraform-${project}" \
+        -backend-config="key=KEY-${PROJECT}.tfstate" \
         -backend-config="dynamodb_table=terraform-${PROJECT}-lock" \
-        -backend-config="region=us-east-1"
+        -backend-config="region=${AWS_REGION}"
 
 update: ## Gets any module updates
 	@terraform get -update=true &>/dev/null
