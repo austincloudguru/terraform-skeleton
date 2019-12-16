@@ -56,7 +56,7 @@ The statefile.tf file is for creating the resources needed to create the S3 buck
 The README.md and LICENSE file are self explanitory.
 
 ## Starting a New Project (New Way)
-Now when I start a new project, it is relatively easy for me to .  I use GitHub, and the recently introduced the concepts of templates, so it really easy to create a new repository via the CLI from a template:
+Now when I start a new project, it is relatively easy for me to .  I use GitHub, and they recently introduced the concepts of templates, so I can easily create a new repository via the CLI:
 ```shell script
 curl -s -X POST https://api.github.com/repos/austincloudguru/terraform-skeleton/generate \
 -H "Accept: application/vnd.github.baptiste-preview+json" \
@@ -71,7 +71,7 @@ curl -s -X POST https://api.github.com/repos/austincloudguru/terraform-skeleton/
 EOF
 )|jq -r .ssh_url
 ```
-From there you can clone the repository.
+This command will output the SSH URL that you can use to clone the newly created repo.
 
 ## Starting a New Project (Original Way)
 Now when I start a new project, it is relatively easy for me to .  Since I use GitHub, all my commands will be tailored for that platform.
