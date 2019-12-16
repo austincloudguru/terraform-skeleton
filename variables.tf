@@ -6,6 +6,7 @@ variable "aws_region" {
   type        = string
   default     = "us-east-1"
 }
+
 variable "tf_project" {
   description = "The name of the project folder that inputs.tfvars is in"
   type        = string
