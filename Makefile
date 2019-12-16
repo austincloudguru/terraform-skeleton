@@ -1,13 +1,12 @@
 # Makefile for running Terraform.
 ## Set the Project Variables
-s3_bucket="terraform-${PROJECT}"
+s3_bucket="${PROJECT}-tf"
 key="-${PROJECT}.tfstate"
 dynamodb_table="terraform-${PROJECT}-lock"
 region=${AWS_REGION}
 
 
 .PHONY: help
-
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
@@ -29,7 +28,7 @@ init: set-env ## Initializes the terraform remote state backend and pulls the co
 	@rm -rf .terraform/*.tf*
 	@terraform init \
         -backend-config="bucket=${s3_bucket}" \
-        -backend-config="key=${key} \
+        -backend-config="key=${key}" \
         -backend-config="dynamodb_table=${dynamodb_table}" \
         -backend-config="region=${region}"
 
