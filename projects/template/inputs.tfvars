@@ -2,3 +2,4 @@
 # Project Variables
 #------------------------------------------------------------------------------
 tf_project = "template"
+aws_region = "us-east-1"
