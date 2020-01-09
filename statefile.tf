@@ -2,7 +2,7 @@
 # Setup the backend for the state file
 #------------------------------------------------------------------------------
 resource "aws_s3_bucket" "terraform-state-storage-s3" {
-  bucket = "terraform-${var.tf_project}"
+  bucket = "${var.tf_project}-tf"
   versioning {
     enabled = true
   }
