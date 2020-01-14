@@ -1,7 +1,8 @@
 # Makefile for running Terraform.
 ## Set the Project Variables
+key_name=""
 s3_bucket="${PROJECT}-tf"
-key="-${PROJECT}.tfstate"
+key="${PROJECT}-${key_name}.tfstate"
 dynamodb_table="terraform-${PROJECT}-lock"
 region=${AWS_REGION}
 
