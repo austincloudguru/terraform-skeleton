@@ -58,10 +58,3 @@ output: update ## Show outputs of a module or the entire state.
 
 destroy: init update ## Destroys targets
 	@terraform destroy -var-file=projects/globals/inputs.tfvars -var-file=projects/$(PROJECT)/inputs.tfvars
-
-lint: ## Lint and format the terraform project
-  @terraform fmt
-  @terraform fmt ./projects/$(PROJECT)
-  @terraform fmt ./projects/globals
-  @tflint
-  @tflint --var-file=projects/$(PROJECT)/inputs.tfvars
